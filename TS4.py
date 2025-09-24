@@ -171,3 +171,38 @@ plt.hist(EEFT, bins=20, edgecolor='k')
 plt.xlabel("EE [dB]")
 plt.ylabel("Frecuencia")
 plt.title("Figura [13]:Histograma de energía estimada para ventana ventana flat top")
+
+#Graficos sin sesgo 
+plt.figure()
+plt.hist(EERec-np.median(EERec), bins=20, edgecolor='k')
+plt.xlabel("EE [dB]")
+plt.ylabel("Frecuencia")
+plt.title("Figura [14]:Histograma de energía estimada para ventana rectangular sin sesgo")
+
+plt.figure()
+plt.hist(EEwH-np.median(EEwH), bins=20, edgecolor='k')
+plt.xlabel("EE [dB]")
+plt.ylabel("Frecuencia")
+plt.title("Figura [15]:Histograma de energía estimada para ventana Hanning sin sesgo")
+
+plt.figure()
+plt.hist(EEBH-np.median(EEBH), bins=20, edgecolor='k')
+plt.xlabel("EE [dB]")
+plt.ylabel("Frecuencia")
+plt.title("Figura [16]:Histograma de energía estimada para ventana Blackman sin sesgo")
+
+plt.figure()
+plt.hist(EEFT-np.median(EEFT), bins=20, edgecolor='k')
+plt.xlabel("EE [dB]")
+plt.ylabel("Frecuencia")
+plt.title("Figura [17]:Histograma de energía estimada para ventana ventana flat top sin sesgo")
+
+#Estimador de frecuencia
+EFRec=np.argmax(np.abs(FFTxxRec[:N//2+1])) #Estimador de frecuencia de la  ventana rectangular implicita  
+EFxxwH=np.argmax(np.abs(FFTxxwH[:N//2+1])) #Estimador de frecuencia de la  ventana hanning
+EFxxBH=np.argmax(np.abs(FFTxxBH[:N//2+1])) #Estimador de frecuencia de la  ventana Blackman
+EFxxFT=np.argmax(np.abs(FFTxxFT[:N//2+1])) #Estimador de frecuencia de la  ventana flat top
+FeRec=EFRec*dF #indice de frecuencia para ventana rectangular
+FewH=EFxxwH*dF #indice de frecuencia para ventana hanning
+FeBH=EFxxBH*dF #indice de frecuencia para ventana Blackman
+FeFT=EFxxFT*dF #indice de frecuencia para ventana flat top
